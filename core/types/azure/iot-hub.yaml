@@ -1,0 +1,17 @@
+name: azure/iot-hub
+exports:
+  default:
+    usage:
+      properties:
+        policy:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+            enum: [registryRead, registryWrite, serviceConnect, deviceConnect]
+          uniqueItems: true
+          minItems: 1
+    properties:
+      connectionString:
+        type: string

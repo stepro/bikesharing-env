@@ -1,0 +1,21 @@
+name: azure/service-bus-namespace
+properties:
+  queues:
+    type: array
+    items:
+      type: string
+exports:
+  default:
+    usage:
+      properties:
+        queue:
+          type: string
+        claims:
+          type: array
+          items:
+            type: string
+          minItems: 1
+      required: [queue, claims]
+    properties:
+      connectionString:
+        type: string

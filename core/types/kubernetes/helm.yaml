@@ -1,0 +1,9 @@
+name: kubernetes/helm
+properties:
+  chart:
+    type: string
+  set:
+    type: object
+exports:
+  default:
+    properties:

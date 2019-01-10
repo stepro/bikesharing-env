@@ -1,0 +1,27 @@
+name: mongo
+properties:
+  databases:
+    type: array
+    items:
+      type: string
+exports:
+  default:
+    usage:
+      properties:
+        roles:
+          type: array
+          items:
+            type: string
+        privileges:
+          type: array
+          items:
+            type: object
+            properties:
+              resource:
+                type: string
+              actions:
+                type: string
+                enum: [find, insert, ...]
+    properties:
+      connectionString:
+        type: string

@@ -1,0 +1,21 @@
+name: static-website
+properties:
+  templatedFiles:
+    type: array
+    items:
+      type: string
+  indexPage:
+    type: string
+  errorPage:
+    type: string
+development:
+  properties:
+    workspace:
+      type: array
+      items:
+        type: string
+exports:
+  default:
+    properties:
+      endpoint:
+        type: string

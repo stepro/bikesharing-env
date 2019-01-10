@@ -1,0 +1,51 @@
+name: container
+properties:
+  public:
+    type: boolean
+  image:
+    type: string
+  templatedFiles:
+    type: array
+    items:
+      type: string
+  environment:
+    type: object
+    propertyNames:
+      pattern: "[a-zA-Z_][a-zA-Z0-9_]*"
+    additionalProperties:
+      type: string
+  command:
+    oneOf:
+    - type: string
+    - type: array
+      items:
+        type: string
+required: [image]
+development:
+  properties:
+    workspace:
+      type: array
+      items:
+        type: string
+    refresh:
+      type: object
+      properties:
+        killProcesses:
+          type: array
+          items:
+            type: string
+        inlineRebuild:
+          oneOf:
+          - type: boolean
+          - type: array
+            items:
+              oneOf:
+              - type: string
+              - type: array
+                items:
+                  type: string
+exports:
+  default:
+    properties:
+      endpoint:
+        type: string
