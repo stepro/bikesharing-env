@@ -1,0 +1,5 @@
+name: container
+exports:
+  default:
+    usage:
+    type: foo

@@ -1,0 +1,40 @@
+types:
+- ../core/types/**
+
+bindings:
+- selector:
+    component: azure/default-context
+    type: azure/context
+  exports:
+    tenantId: ${AAD_TENANT_ID:-MISSING_REQUIRED_VALUE}
+    servicePrincipalId: ${AAD_SERVICE_PRINCIPAL_ID:-MISSING_REQUIRED_VALUE}
+    servicePrincipalSecret: "@{servicePrincipalSecret.txt|MISSING_REQUIRED_VALUE}"
+    subscriptionId: ${AZURE_SUBSCRIPTION_ID:-MISSING_REQUIRED_VALUE}
+    defaultResourceGroup: ${AZURE_RESOURCE_GROUP:-MISSING_REQUIRED_VALUE}
+- selector:
+    type: azure/*
+  dependencies:
+    context: azure/default-context
+  provider:
+    image: mindaro/azure:stable
+    environment:
+      TENANT_ID: $(context.tenantId)
+      SERVICE_PRINCIPAL_ID: $(context.servicePrincipalId)
+      SERVICE_PRINCIPAL_SECRET: $(context.servicePrincipalSecret)
+      SUBSCRIPTION_ID: $(context.subscriptionId)
+      DEFAULT_RESOURCE_GROUP: $(context.defaultResourceGroup)
+- source:
+    type: static-website
+    provider:
+      image: mindaro/generic-azure
+  target:
+    type: azure/storage-account
+    provider:
+      entrypoint: mindaro-azure.exe
+      environment:
+        foo: bar
+      options:
+      - -o
+      - json
+  provider:
+    image: microsoft/mindaro-azure-connectors

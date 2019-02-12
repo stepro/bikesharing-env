@@ -1,15 +1,15 @@
 name: mongo
+title: Mongo database
 properties:
-  databases:
-    type: array
-    items:
-      type: string
+  foo:
+    type: string
+required: [foo] 
 exports:
   default:
     usage:
       properties:
         roles:
-          type: array
+          type: [array]
           items:
             type: string
         privileges:
